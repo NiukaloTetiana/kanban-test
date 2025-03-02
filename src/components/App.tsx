@@ -1,7 +1,11 @@
+import { Container } from "@chakra-ui/react";
+
+import { SearchBar } from "../components";
+
 export const App = () => {
   return (
-    <div className="h-screen flex justify-center items-center">
-      <h1 className="text-4xl text-slate-200">Vite + React + TypeScript</h1>
-    </div>
+    <Container maxWidth={{ base: "375px", md: "768px", lg: "1280px" }} py={10}>
+      <SearchBar />
+    </Container>
   );
 };

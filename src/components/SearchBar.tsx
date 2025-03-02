@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, CloseButton, Flex, Input } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 import { InputGroup } from "./ui/input-group";
+import { Button, CloseButton, Flex, Input } from "@chakra-ui/react";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState("");
