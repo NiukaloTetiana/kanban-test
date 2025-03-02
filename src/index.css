@@ -2,6 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fonts */
+@font-face {
+  font-family: "Gilroy";
+  src:
+    url("../src/assets/fonts/Gilroy-Medium.woff2") format("woff2"),
+    url("../src/assets/fonts/Gilroy-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src:
+    url("../src/assets/fonts/Gilroy-Bold.woff2") format("woff2"),
+    url("../src/assets/fonts/Gilroy-Bold.woff") format("woff");
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+#root {
+  @apply flex min-h-screen flex-col;
+}
+
+::selection {
+  @apply bg-[#f9f9f990] text-[#141414];
+}
+
+::-moz-selection {
+  @apply bg-[#f9f9f990] text-[#141414];
+}
+
+@layer base {
+  * {
+    @apply outline-none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: slategrey;
+  @apply font-gilroy bg-[#141414] font-medium;
+}
+
+input {
+  @apply outline-none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #f9f9f9 inset;
+  box-shadow: 0 0 0px 1000px #f9f9f9 inset;
+  -webkit-text-fill-color: #262626 !important;
+}
+
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #f9f9f9 inset;
+  box-shadow: 0 0 0px 1000px #f9f9f9 inset;
+  -webkit-text-fill-color: #1f1f1f !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.text {
+  @apply text-[14px] leading-[1.33] tracking-[-0.02em] md:text-[16px] md:leading-[1.29];
 }
