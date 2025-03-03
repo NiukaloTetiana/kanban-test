@@ -28,11 +28,11 @@
 }
 
 ::selection {
-  @apply bg-[#f9f9f990] text-[#141414];
+  @apply bg-[#f9f9f9] text-[#141414];
 }
 
 ::-moz-selection {
-  @apply bg-[#f9f9f990] text-[#141414];
+  @apply bg-[#f9f9f9] text-[#141414];
 }
 
 @layer base {
