@@ -4,12 +4,14 @@ import { InputGroup } from "./ui/input-group";
 import { Button, CloseButton, Flex, Input, Text } from "@chakra-ui/react";
 
 import { githubRepoRegex } from "../constants";
-
 import { getRepoInfo } from "../helpers";
+import { useAppDispatch } from "../hooks";
+import { getIssues } from "../redux";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
 
   const isValid = githubRepoRegex.test(query);
 
@@ -28,7 +30,13 @@ export const SearchBar = () => {
     if (trimmedQuery && isValid) {
       setSearchParams({ query });
 
-      console.log(getRepoInfo(query));
+      const repoInfo = getRepoInfo(query);
+
+      dispatch(getIssues(repoInfo))
+        .unwrap()
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
