@@ -25,7 +25,7 @@ const issuesSlice = createSlice({
     builder
       .addCase(getIssues.fulfilled, (state, action) => {
         state.issues.toDo = action.payload.filter(
-          (issue) => issue.state === "open"
+          (issue) => issue.state === "open" && issue.assignee === null
         );
         state.issues.inProgress = action.payload.filter(
           (issue) => issue.state === "open" && issue.assignee !== null
