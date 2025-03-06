@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { InputGroup } from "./ui/input-group";
+import { useSearchParams } from "react-router-dom";
 import { Button, CloseButton, Flex, Input, Text } from "@chakra-ui/react";
 
 import { githubRepoRegex } from "../constants";
@@ -34,9 +35,7 @@ export const SearchBar = () => {
 
       dispatch(getIssues(repoInfo))
         .unwrap()
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => toast.error(error));
     }
   };
 

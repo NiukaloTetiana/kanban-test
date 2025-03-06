@@ -22,7 +22,7 @@ export const Links = () => {
   const repoInfo = getRepoInfo(url);
 
   return (
-    <Flex gap={2} mt={4}>
+    <Flex gap={2} mt={4} mb={4}>
       <Link target="_blank" to={links.repoUrl}>
         {repoInfo.repo.charAt(0).toUpperCase() + repoInfo.repo.slice(1)}
       </Link>
