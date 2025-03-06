@@ -77,3 +77,45 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.link {
+  @apply underline transition duration-500;
+
+  &:hover,
+  &:focus-visible,
+  &.active {
+    @apply text-[#4f92f7];
+  }
+}
+
+.scrollbar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: auto !important;
+  --sb-track-color: transparent;
+  --sb-thumb-color: #696969b3;
+  --sb-size: 6px;
+  --sb-margin: 20px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 12px;
+  margin-top: var(--sb-margin);
+  margin-bottom: var(--sb-margin);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 12px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .scrollbar {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
