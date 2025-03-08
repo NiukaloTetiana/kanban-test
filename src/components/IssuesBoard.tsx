@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
@@ -54,6 +54,7 @@ export const IssuesBoard = () => {
                 ulRef={provided.innerRef}
                 title={column.name}
                 issues={column.issues}
+                provided={provided}
                 {...provided.droppableProps}
               />
             )}

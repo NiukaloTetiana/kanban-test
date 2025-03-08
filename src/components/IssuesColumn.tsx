@@ -1,6 +1,6 @@
 import { ForwardedRef } from "react";
-import { Draggable } from "react-beautiful-dnd";
 import { List, ListItem, Heading, Box } from "@chakra-ui/react";
+import { Draggable, DroppableProvided } from "@hello-pangea/dnd";
 
 import { Issue } from "../types";
 
@@ -10,12 +10,14 @@ interface IIssuesColumnProps {
   title: string;
   issues: Issue[];
   ulRef: ForwardedRef<HTMLUListElement>;
+  provided: DroppableProvided;
 }
 
 export const IssuesColumn = ({
   title,
   issues,
   ulRef,
+  provided,
   ...rest
 }: IIssuesColumnProps) => {
   return (
@@ -63,6 +65,7 @@ export const IssuesColumn = ({
             )}
           </Draggable>
         ))}
+        {provided.placeholder}
       </List.Root>
     </Box>
   );
