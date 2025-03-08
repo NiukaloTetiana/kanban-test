@@ -3,11 +3,11 @@ import { formatDistanceToNow } from "date-fns";
 
 import { Issue } from "../types";
 
-interface IIssuesItemProps {
+interface IIssueContentProps {
   issue: Issue;
 }
 
-export const IssuesItem = ({ issue }: IIssuesItemProps) => {
+export const IssueContent = ({ issue }: IIssueContentProps) => {
   const { title, number, comments, created_at } = issue;
 
   return (

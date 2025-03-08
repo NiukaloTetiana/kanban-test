@@ -35,6 +35,12 @@ export const SearchBar = () => {
 
       dispatch(getIssues(repoInfo))
         .unwrap()
+        .then((issues) => {
+          if (!issues.length)
+            return toast.info(
+              "There are no issues in this repo. Or maybe they`re just hiding? 🕵️‍♂️"
+            );
+        })
         .catch((error) => toast.error(error));
     }
   };
