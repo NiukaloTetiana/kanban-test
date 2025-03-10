@@ -35,7 +35,7 @@ export const IssuesColumn = ({
 
       <List.Root
         gap={2}
-        maxH="62dvh"
+        maxH="calc(100dvh - 250px)"
         minH="300px"
         bg="#1f1f1f"
         borderRadius="30px"
@@ -54,7 +54,7 @@ export const IssuesColumn = ({
               <ListItem
                 bg="#f9f9f9"
                 color="#1f1f1f"
-                p={5}
+                p={3}
                 borderRadius="12px"
                 ref={provided.innerRef}
                 {...provided.draggableProps}

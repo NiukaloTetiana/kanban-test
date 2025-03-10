@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -67,5 +67,11 @@ export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
         ))}
       </DragDropContext>
     </Flex>
-  ) : null;
+  ) : (
+    <Flex align="center" justify="center" h="400px" w="550px" mx="auto">
+      <Text fontWeight="bold" fontSize="30px" textAlign="center">
+        🔍You haven't searched for issues yet. Maybe try finding some issues ?🚀
+      </Text>
+    </Flex>
+  );
 };
