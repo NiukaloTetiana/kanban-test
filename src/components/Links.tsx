@@ -2,13 +2,23 @@ import { Flex, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../hooks";
-import { selectDone, selectInProgress, selectToDo } from "../redux";
 import { getGitHubLinks, getRepoInfo } from "../helpers";
+import { selectIssuesByRepoAndColumn } from "../redux";
 
-export const Links = () => {
-  const toDoIssues = useAppSelector(selectToDo);
-  const inProgressIssues = useAppSelector(selectInProgress);
-  const doneIssues = useAppSelector(selectDone);
+interface ILinksProps {
+  repoKey: string;
+}
+
+export const Links = ({ repoKey }: ILinksProps) => {
+  const toDoIssues = useAppSelector(
+    selectIssuesByRepoAndColumn(repoKey, "toDo")
+  );
+  const inProgressIssues = useAppSelector(
+    selectIssuesByRepoAndColumn(repoKey, "inProgress")
+  );
+  const doneIssues = useAppSelector(
+    selectIssuesByRepoAndColumn(repoKey, "done")
+  );
 
   if (!toDoIssues.length && !inProgressIssues.length && !doneIssues.length)
     return null;

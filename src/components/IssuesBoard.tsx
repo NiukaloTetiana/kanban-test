@@ -5,16 +5,20 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   moveIssue,
   reorderIssues,
-  selectDone,
-  selectInProgress,
-  selectToDo,
+  selectIssuesByRepoAndColumn,
 } from "../redux";
 import { IssuesColumn } from "./IssuesColumn";
 
-export const IssuesBoard = () => {
-  const toDoIssues = useAppSelector(selectToDo);
-  const inProgressIssues = useAppSelector(selectInProgress);
-  const doneIssues = useAppSelector(selectDone);
+export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
+  const toDoIssues = useAppSelector(
+    selectIssuesByRepoAndColumn(repoKey, "toDo")
+  );
+  const inProgressIssues = useAppSelector(
+    selectIssuesByRepoAndColumn(repoKey, "inProgress")
+  );
+  const doneIssues = useAppSelector(
+    selectIssuesByRepoAndColumn(repoKey, "done")
+  );
   const dispatch = useAppDispatch();
 
   const columns = {
@@ -34,13 +38,14 @@ export const IssuesBoard = () => {
     if (source.droppableId === destination.droppableId) {
       dispatch(
         reorderIssues({
+          repo: repoKey,
           columnId: source.droppableId,
           sourceIndex: source.index,
           destinationIndex: destination.index,
         })
       );
     } else {
-      dispatch(moveIssue({ source, destination }));
+      dispatch(moveIssue({ repo: repoKey, source, destination }));
     }
   };
 

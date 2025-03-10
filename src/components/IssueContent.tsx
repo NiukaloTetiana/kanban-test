@@ -8,11 +8,11 @@ interface IIssueContentProps {
 }
 
 export const IssueContent = ({ issue }: IIssueContentProps) => {
-  const { title, number, comments, created_at } = issue;
+  const { title, number, comments, created_at, user } = issue;
 
   return (
     <>
-      <Text truncate fontWeight="bold" fontSize="18px" mb={2}>
+      <Text title={title} truncate fontWeight="bold" fontSize="18px" mb={2}>
         {title}
       </Text>
       <Flex gap={1}>
@@ -22,7 +22,9 @@ export const IssueContent = ({ issue }: IIssueContentProps) => {
         <Text>opened {formatDistanceToNow(new Date(created_at))} ago</Text>
       </Flex>
 
-      <Text fontWeight="bold">Admin | Comments: {comments}</Text>
+      <Text fontWeight="bold">
+        {user?.login} | Comments: {comments}
+      </Text>
     </>
   );
 };
