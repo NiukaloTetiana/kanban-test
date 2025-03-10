@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage";
 import {
   persistStore,
-  // persistReducer,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -10,16 +10,18 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { issuesReducer } from "./issues/issuesSlice";
+import { issuesReducer, IssuesState } from "./issues/issuesSlice";
 
-// const persistConfig = {
-//   key: "root",
-//   storage,
-// };
+const persistConfig = {
+  key: "issues",
+  version: 1,
+  storage,
+  whiteList: ["issues"],
+};
 
 export const store = configureStore({
   reducer: {
-    issues: issuesReducer,
+    issues: persistReducer<IssuesState>(persistConfig, issuesReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
