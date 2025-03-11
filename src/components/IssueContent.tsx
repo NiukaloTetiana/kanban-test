@@ -23,7 +23,8 @@ export const IssueContent = ({ issue }: IIssueContentProps) => {
       </Flex>
 
       <Text fontWeight="bold">
-        {user?.login} | Comments: {comments === 0 ? "No comments" : comments}
+        {user?.login} | Comments:{" "}
+        {comments === 0 ? "no comments yet" : comments}
       </Text>
     </>
   );

@@ -28,6 +28,11 @@ export const SearchBar = () => {
     e.preventDefault();
 
     const trimmedQuery = query.trim();
+
+    if (!trimmedQuery) {
+      return toast.info("Hey, don't forget to enter a repo URL! 🙈");
+    }
+
     if (trimmedQuery && isValid) {
       setSearchParams({ query });
 
@@ -42,6 +47,8 @@ export const SearchBar = () => {
             );
         })
         .catch((error) => toast.error(error));
+    } else if (!isValid) {
+      toast.error("Oops, that's not a valid GitHub repo URL. 😬");
     }
   };
 

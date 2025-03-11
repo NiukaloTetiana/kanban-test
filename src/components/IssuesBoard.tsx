@@ -68,9 +68,9 @@ export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
       </DragDropContext>
     </Flex>
   ) : (
-    <Flex align="center" justify="center" h="400px" w="550px" mx="auto">
+    <Flex align="center" justify="center" h="400px" w="400px" mx="auto">
       <Text fontWeight="bold" fontSize="30px" textAlign="center">
-        🔍You haven't searched for issues yet. Maybe try finding some issues ?🚀
+        🔍No searches yet... Maybe try finding some issues ?🚀
       </Text>
     </Flex>
   );
