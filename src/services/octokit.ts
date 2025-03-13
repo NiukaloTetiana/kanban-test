@@ -1,3 +1,3 @@
 import { Octokit } from "@octokit/rest";
 
-export const octokit = new Octokit();
+export const octokit: Octokit = new Octokit();
