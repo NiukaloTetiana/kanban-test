@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { RootState } from "../store";
 import { octokit } from "../../services";
 import { IssuesResponse } from "../../types";
-import { RootState } from "../store";
 
 export const getIssues = createAsyncThunk<
   IssuesResponse,
@@ -16,9 +16,11 @@ export const getIssues = createAsyncThunk<
       const repoKey = `${owner}/${repo}`;
 
       if (issues.issues[repoKey]) {
-        return issues.issues[repoKey].toDo
-          .concat(issues.issues[repoKey].inProgress)
-          .concat(issues.issues[repoKey].done);
+        return [
+          ...issues.issues[repoKey].toDo,
+          ...issues.issues[repoKey].inProgress,
+          ...issues.issues[repoKey].done,
+        ];
       }
 
       const { data } = await octokit.rest.issues.listForRepo({

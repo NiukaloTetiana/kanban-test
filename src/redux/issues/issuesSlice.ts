@@ -66,7 +66,10 @@ const issuesSlice = createSlice({
       .addCase(getIssues.fulfilled, (state, action) => {
         const repoKey = action.meta.arg.owner + "/" + action.meta.arg.repo;
 
-        if (action.payload.length === 0 || state.issues[repoKey]) {
+        if (!action.payload.length) {
+          if (!state.issues[repoKey]) {
+            state.issues[repoKey] = { toDo: [], inProgress: [], done: [] };
+          }
           state.isLoading = false;
           return;
         }
@@ -82,6 +85,7 @@ const issuesSlice = createSlice({
         state.issues[repoKey].done = action.payload.filter(
           (issue) => issue.state === "closed"
         );
+
         state.isLoading = false;
       })
       .addCase(getIssues.pending, (state) => {
