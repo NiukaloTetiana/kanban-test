@@ -1,34 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import { issuesReducer, IssuesState } from "./issues/issuesSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+
+import { issuesReducer } from "../redux";
 
 const persistConfig = {
   key: "issues",
   version: 1,
   storage,
-  whiteList: ["issues"],
+  whitelist: ["issues"],
 };
+
+const persistedIssuesReducer = persistReducer(persistConfig, issuesReducer);
 
 export const store = configureStore({
   reducer: {
-    issues: persistReducer<IssuesState>(persistConfig, issuesReducer),
+    issues: persistedIssuesReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
