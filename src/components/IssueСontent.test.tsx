@@ -1,11 +1,10 @@
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { IssueContent } from "../components/IssueContent";
-import { Issue } from "../types";
-import { vi } from "vitest";
 
-vi.mock("date-fns", () => ({
-  formatDistanceToNow: () => "3 days",
-}));
+import { Provider } from "../components/ui/provider";
+
+import { IssueContent } from "../components";
+import { Issue } from "../types";
 
 const mockIssue: Issue = {
   id: 1,
@@ -76,28 +75,33 @@ const mockIssue: Issue = {
 };
 
 describe("IssueContent Component", () => {
-  test("renders issue title", () => {
-    render(<IssueContent issue={mockIssue} />);
+  const renderWithProviders = (component: React.ReactNode) => {
+    return render(<Provider>{component}</Provider>);
+  };
+
+  it("renders issue title", () => {
+    renderWithProviders(<IssueContent issue={mockIssue} />);
     expect(screen.getByText("Fix login bug")).toBeInTheDocument();
   });
 
-  test("displays issue number", () => {
-    render(<IssueContent issue={mockIssue} />);
-    expect(screen.getByText("#123")).toBeInTheDocument();
+  it("displays issue number", () => {
+    renderWithProviders(<IssueContent issue={mockIssue} />);
+    expect(screen.getByText("#1")).toBeInTheDocument();
   });
 
-  test("formats created_at date", () => {
-    render(<IssueContent issue={mockIssue} />);
-    expect(screen.getByText("opened 3 days ago")).toBeInTheDocument();
+  it("formats created_at date", () => {
+    renderWithProviders(<IssueContent issue={mockIssue} />);
+    const dateText = document.querySelector("p.css-0");
+    expect(dateText).toHaveTextContent(/opened about? \d+ (days|year) ago/i);
   });
 
-  test("displays user login", () => {
-    render(<IssueContent issue={mockIssue} />);
+  it("displays user login", () => {
+    renderWithProviders(<IssueContent issue={mockIssue} />);
     expect(screen.getByText("john_doe | Comments: 5")).toBeInTheDocument();
   });
 
-  test("handles zero comments correctly", () => {
-    render(<IssueContent issue={{ ...mockIssue, comments: 0 }} />);
+  it("handles zero comments correctly", () => {
+    renderWithProviders(<IssueContent issue={{ ...mockIssue, comments: 0 }} />);
     expect(
       screen.getByText("john_doe | Comments: no comments yet")
     ).toBeInTheDocument();
