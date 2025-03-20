@@ -29,13 +29,11 @@ export const getIssues = createAsyncThunk<
         per_page: 100,
         state: "all",
       });
-
       return data;
     } catch (error) {
-      if (error instanceof Error && "status" in error && error.status === 404) {
-        return rejectWithValue(
-          "The repository does not exist or has no issues."
-        );
+      const err = error as { response?: { status?: number } };
+      if (err.response?.status === 404) {
+        return rejectWithValue("The repository does not exist.");
       }
 
       return rejectWithValue("Failed to fetch issues.");
