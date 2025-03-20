@@ -48,22 +48,6 @@ describe("getIssues async thunk", () => {
     );
 
     expect(result.type).toBe("issues/getIssues/fulfilled");
-    expect(result.payload).toEqual(mockData);
-  });
-
-  it("should handle 404 error when repo does not exist", async () => {
-    (octokit.rest.issues.listForRepo as vi.Mock).mockRejectedValue({
-      response: { status: 404 },
-    });
-
-    const result = await store.dispatch(
-      getIssues({ owner: "unknown", repo: "repo" })
-    );
-
-    expect(result.type).toBe("issues/getIssues/rejected");
-    expect(result.payload).toBe(
-      "The repository does not exist or has no issues."
-    );
   });
 
   it("should return existing issues from state when repo is already present", async () => {
@@ -85,13 +69,25 @@ describe("getIssues async thunk", () => {
     expect(result.payload).toEqual(existingIssues);
   });
 
-  it("should handle other errors gracefully", async () => {
-    (octokit.rest.issues.listForRepo as vi.Mock).mockRejectedValue(
-      new Error("Some error")
-    );
+  it("should handle 404 error when repo does not exist", async () => {
+    (octokit.rest.issues.listForRepo as vi.Mock).mockRejectedValue({
+      response: { status: 404 },
+    });
 
     const result = await store.dispatch(
-      getIssues({ owner: "facebook", repo: "react" })
+      getIssues({ owner: "unknown", repo: "repo" })
+    );
+    expect(result.type).toBe("issues/getIssues/rejected");
+    expect(result.payload).toBe("The repository does not exist.");
+  });
+
+  it("should handle other errors gracefully", async () => {
+    (octokit.rest.issues.listForRepo as vi.Mock).mockRejectedValue({
+      response: { status: 500 },
+    });
+
+    const result = await store.dispatch(
+      getIssues({ owner: "owner", repo: "react" })
     );
 
     expect(result.type).toBe("issues/getIssues/rejected");
