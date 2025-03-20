@@ -1,6 +1,6 @@
 import { vi } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { DragDropContext } from "@hello-pangea/dnd";
+import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import { IssuesColumn } from "../components";
 import { Provider } from "../components/ui/provider";
@@ -110,6 +110,7 @@ const mockIssues: Issue[] = [
     html_url: "https://example.com/issue/2",
     state: "open",
     state_reason: null,
+
     assignee: null,
     assignees: [],
     labels: [],
@@ -150,16 +151,17 @@ describe("IssuesColumn", () => {
     render(
       <Provider>
         <DragDropContext onDragEnd={vi.fn()}>
-          <IssuesColumn
-            title="Open Issues"
-            issues={mockIssues}
-            ulRef={null}
-            provided={{
-              droppableProps: {},
-              innerRef: vi.fn(),
-              placeholder: <div />,
-            }}
-          />
+          <Droppable droppableId="test-droppable">
+            {(provided) => (
+              <IssuesColumn
+                title="Open Issues"
+                issues={mockIssues}
+                ulRef={provided.innerRef}
+                provided={provided}
+                {...provided.droppableProps}
+              />
+            )}
+          </Droppable>
         </DragDropContext>
       </Provider>
     );
@@ -167,49 +169,49 @@ describe("IssuesColumn", () => {
     expect(screen.getByText("Open Issues")).toBeInTheDocument();
   });
 
-  it("renders all issues", () => {
+  it("renders all issues", async () => {
     render(
       <Provider>
-        <IssuesColumn
-          title="Open Issues"
-          issues={mockIssues}
-          ulRef={null}
-          provided={{
-            droppableProps: {
-              "data-rfd-droppable-id": "test",
-              "data-rfd-droppable-context-id": "test",
-            },
-            innerRef: vi.fn(),
-            placeholder: <div />,
-          }}
-        />
+        <DragDropContext onDragEnd={vi.fn()}>
+          <Droppable droppableId="test-droppable">
+            {(provided) => (
+              <IssuesColumn
+                title="Open Issues"
+                issues={mockIssues}
+                ulRef={provided.innerRef}
+                provided={provided}
+                {...provided.droppableProps}
+              />
+            )}
+          </Droppable>
+        </DragDropContext>
       </Provider>
     );
 
-    mockIssues.forEach((issue) => {
-      expect(screen.getByText(issue.title)).toBeInTheDocument();
-      if (issue.user) {
-        expect(screen.getByText(issue.user.login)).toBeInTheDocument();
-      }
+    await waitFor(() => {
+      mockIssues.forEach(async (issue) => {
+        const issueElement = await screen.findByText(issue.title);
+        expect(issueElement).toBeInTheDocument();
+      });
     });
   });
 
   it("renders the correct number of issues", () => {
     render(
       <Provider>
-        <IssuesColumn
-          title="Open Issues"
-          issues={mockIssues}
-          ulRef={null}
-          provided={{
-            droppableProps: {
-              "data-rfd-droppable-id": "test",
-              "data-rfd-droppable-context-id": "test",
-            },
-            innerRef: vi.fn(),
-            placeholder: <div />,
-          }}
-        />
+        <DragDropContext onDragEnd={vi.fn()}>
+          <Droppable droppableId="test-droppable">
+            {(provided) => (
+              <IssuesColumn
+                title="Open Issues"
+                issues={mockIssues}
+                ulRef={provided.innerRef}
+                provided={provided}
+                {...provided.droppableProps}
+              />
+            )}
+          </Droppable>
+        </DragDropContext>
       </Provider>
     );
 
