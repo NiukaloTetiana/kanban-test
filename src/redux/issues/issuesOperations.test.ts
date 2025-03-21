@@ -1,9 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
 import { describe, it, expect, vi } from "vitest";
 
 import { octokit } from "../../services";
-import { getIssues, issuesReducer } from "../../redux";
-import { RootState } from "../../redux";
+import { getIssues, store } from "../../redux";
+import { mockIssues } from "../../constants";
 
 vi.mock("../../services", () => ({
   octokit: {
@@ -15,32 +14,13 @@ vi.mock("../../services", () => ({
   },
 }));
 
-const initialState: RootState = {
-  issues: {
-    issues: {
-      "facebook/react": {
-        toDo: [{ id: 1, title: "Issue 1", state: "open", assignee: null }],
-        inProgress: [],
-        done: [],
-      },
-    },
-    isLoading: false,
-  },
-};
-
-const store = configureStore({
-  reducer: { issues: issuesReducer },
-  preloadedState: initialState,
-});
-
 describe("getIssues async thunk", () => {
   it("should fetch issues successfully when repo doesn't exist in state", async () => {
-    const mockData = [
-      { id: 1, title: "New Issue", state: "open", assignee: null },
-    ];
-
-    (octokit.rest.issues.listForRepo as vi.Mock).mockResolvedValue({
-      data: mockData,
+    vi.mocked(octokit.rest.issues.listForRepo).mockResolvedValue({
+      data: mockIssues,
+      headers: {},
+      status: 200,
+      url: "https://api.github.com/repos/facebook/react/issues",
     });
 
     const result = await store.dispatch(
@@ -70,7 +50,7 @@ describe("getIssues async thunk", () => {
   });
 
   it("should handle 404 error when repo does not exist", async () => {
-    (octokit.rest.issues.listForRepo as vi.Mock).mockRejectedValue({
+    vi.mocked(octokit.rest.issues.listForRepo).mockRejectedValue({
       response: { status: 404 },
     });
 
@@ -82,7 +62,7 @@ describe("getIssues async thunk", () => {
   });
 
   it("should handle other errors gracefully", async () => {
-    (octokit.rest.issues.listForRepo as vi.Mock).mockRejectedValue({
+    vi.mocked(octokit.rest.issues.listForRepo).mockRejectedValue({
       response: { status: 500 },
     });
 
