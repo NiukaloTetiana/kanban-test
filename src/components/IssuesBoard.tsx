@@ -49,7 +49,10 @@ export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
     }
   };
 
-  return toDoIssues.length || inProgressIssues.length || doneIssues.length ? (
+  const hasIssues =
+    toDoIssues?.length || inProgressIssues?.length || doneIssues?.length;
+
+  return hasIssues ? (
     <Flex gap={3}>
       <DragDropContext onDragEnd={onDragEnd}>
         {Object.entries(columns).map(([key, column]) => (
