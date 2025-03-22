@@ -8,7 +8,6 @@ import { Links } from "../components";
 import { getRepoInfo } from "../helpers";
 import { useAppSelector } from "../hooks";
 import { Provider as UIProvider } from "./ui/provider";
-import { RootState } from "../redux";
 
 const mockStore = configureStore({
   reducer: {
@@ -17,7 +16,7 @@ const mockStore = configureStore({
 });
 
 vi.mock("../hooks", () => ({
-  useAppSelector: vi.fn<(selector: (state: RootState) => any) => any>(),
+  useAppSelector: vi.fn(),
 }));
 
 vi.mock("../helpers", () => ({
@@ -37,7 +36,7 @@ describe("Links component", () => {
   });
 
   it("does not render if there are no tasks", () => {
-    (useAppSelector as vi.Mock).mockReturnValue([]);
+    vi.mocked(useAppSelector).mockReturnValue([]);
 
     const { container } = render(
       <MemoryRouter>
@@ -51,7 +50,7 @@ describe("Links component", () => {
   });
 
   it("renders correct links", () => {
-    (useAppSelector as vi.Mock).mockReturnValue([
+    vi.mocked(useAppSelector).mockReturnValue([
       { html_url: "https://github.com/user/repo/issues/1" },
     ]);
 
@@ -82,7 +81,7 @@ describe("Links component", () => {
 });
 
 it("renders multiple links correctly", () => {
-  (useAppSelector as vi.Mock).mockReturnValue([
+  vi.mocked(useAppSelector).mockReturnValue([
     { html_url: "https://github.com/user/repo/issues/1" },
     { html_url: "https://github.com/user/repo/issues/2" },
   ]);
@@ -102,7 +101,7 @@ it("renders multiple links correctly", () => {
 });
 
 it("does not render if repoKey is missing", () => {
-  (useAppSelector as vi.Mock).mockReturnValue([
+  vi.mocked(useAppSelector).mockReturnValue([
     { html_url: "https://github.com/user/repo/issues/1" },
   ]);
 
