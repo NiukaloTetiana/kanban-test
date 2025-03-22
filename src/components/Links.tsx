@@ -32,7 +32,14 @@ export const Links = ({ repoKey }: ILinksProps) => {
   const repoInfo = getRepoInfo(url);
 
   return (
-    <Flex gap={2} mt={4} mb={4} fontSize="18px">
+    <Flex
+      data-testid="links"
+      data-repokey={repoKey}
+      gap={2}
+      mt={4}
+      mb={4}
+      fontSize="18px"
+    >
       <Link
         rel="noopener noreferrer"
         target="_blank"
