@@ -53,7 +53,7 @@ export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
     toDoIssues?.length || inProgressIssues?.length || doneIssues?.length;
 
   return hasIssues ? (
-    <Flex gap={3}>
+    <Flex data-testid="issues-board" data-repokey={repoKey} gap={3}>
       <DragDropContext onDragEnd={onDragEnd}>
         {Object.entries(columns).map(([key, column]) => (
           <Droppable key={key} droppableId={column.id}>

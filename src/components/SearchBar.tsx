@@ -80,6 +80,8 @@ export const SearchBar = () => {
         }
       >
         <Input
+          role="searchbox"
+          data-testid="search-input"
           placeholder="Enter repo URL"
           name="query"
           type="url"
