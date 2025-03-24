@@ -1,7 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 import { IssuesResponse } from "../../types";
-import { getIssues } from "./issuesOperations";
+import { getIssues } from "../../redux";
 
 export interface IIssuesSlice {
   issues: Record<

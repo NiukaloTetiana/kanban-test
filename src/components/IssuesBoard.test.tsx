@@ -7,10 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 import { IssuesBoard } from "../components";
+
 import * as hooks from "../hooks";
-import { Provider as UIProvider } from "../components/ui/provider";
 import { store, moveIssue, reorderIssues, RootState } from "../redux";
 import { mockIssues } from "../constants";
+import { Provider as UIProvider } from "../components/ui/provider";
 
 vi.mock("../hooks", () => ({
   useAppSelector: vi.fn(),

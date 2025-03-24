@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import { Provider } from "../components/ui/provider";
-
 import { IssueContent } from "../components";
+
 import { mockIssues } from "../constants";
+import { Provider } from "../components/ui/provider";
 
 describe("IssueContent Component", () => {
   const renderWithProviders = (component: React.ReactNode) => {

@@ -3,9 +3,10 @@ import { Container } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 
 import { IssuesBoard, Links, Loader, SearchBar } from "../components";
+
+import { getRepoInfo } from "../helpers";
 import { useAppSelector } from "../hooks";
 import { selectIsLoading } from "../redux";
-import { getRepoInfo } from "../helpers";
 
 export const App = () => {
   const isLoading = useAppSelector(selectIsLoading);

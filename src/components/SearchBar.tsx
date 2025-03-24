@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { InputGroup } from "./ui/input-group";
+import { useSearchParams } from "react-router-dom";
 import { Button, CloseButton, Flex, Input, Text } from "@chakra-ui/react";
 
-import { githubRepoRegex } from "../constants";
 import { getRepoInfo } from "../helpers";
 import { useAppDispatch } from "../hooks";
 import { getIssues } from "../redux";
+import { githubRepoRegex } from "../constants";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState("");

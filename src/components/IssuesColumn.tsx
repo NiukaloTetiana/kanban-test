@@ -2,9 +2,9 @@ import { ForwardedRef } from "react";
 import { List, ListItem, Heading, Box } from "@chakra-ui/react";
 import { Draggable, DroppableProvided } from "@hello-pangea/dnd";
 
-import { Issue } from "../types";
-
 import { IssueContent } from "../components";
+
+import { Issue } from "../types";
 
 interface IIssuesColumnProps {
   title: string;

@@ -4,10 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider as UIProvider } from "./ui/provider";
 import { render, screen } from "@testing-library/react";
 
-import { store } from "../redux";
-import { useAppSelector } from "../hooks";
-import { mockIssues } from "../constants";
 import { App } from "../components";
+
+import { useAppSelector } from "../hooks";
+import { store } from "../redux";
+import { mockIssues } from "../constants";
 
 vi.mock("../hooks", async () => {
   const actual = await import("../hooks");

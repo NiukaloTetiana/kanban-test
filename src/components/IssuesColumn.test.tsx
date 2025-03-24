@@ -3,8 +3,9 @@ import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { render, screen, waitFor } from "@testing-library/react";
 
 import { IssuesColumn } from "../components";
-import { Provider } from "../components/ui/provider";
+
 import { mockIssues } from "../constants";
+import { Provider } from "../components/ui/provider";
 
 describe("IssuesColumn", () => {
   it("renders the column title correctly", () => {

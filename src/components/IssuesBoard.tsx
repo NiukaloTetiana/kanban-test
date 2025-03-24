@@ -1,13 +1,14 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 
+import { IssuesColumn } from "../components";
+
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   moveIssue,
   reorderIssues,
   selectIssuesByRepoAndColumn,
 } from "../redux";
-import { IssuesColumn } from "./IssuesColumn";
 
 export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
   const toDoIssues = useAppSelector(

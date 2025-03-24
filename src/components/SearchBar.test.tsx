@@ -1,12 +1,13 @@
 import { vi } from "vitest";
 import { Provider } from "react-redux";
+import { toast } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
 import { Provider as UIProvider } from "./ui/provider";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 import { SearchBar } from "../components";
+
 import { store } from "../redux";
-import { toast } from "react-toastify";
 
 const mockDispatch = vi.fn(() => ({
   unwrap: vi.fn().mockResolvedValue([]),
