@@ -23,6 +23,7 @@ export const IssuesColumn = ({
   return (
     <Box w="1/3">
       <Heading
+        data-testid={`column-title-${title}`}
         as="h3"
         size="md"
         mb={6}
@@ -52,6 +53,7 @@ export const IssuesColumn = ({
           >
             {(provided) => (
               <ListItem
+                data-testid={issue.title}
                 bg="#f9f9f9"
                 color="#1f1f1f"
                 p={3}

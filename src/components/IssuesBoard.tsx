@@ -59,6 +59,7 @@ export const IssuesBoard = ({ repoKey }: { repoKey: string }) => {
           <Droppable key={key} droppableId={column.id}>
             {(provided) => (
               <IssuesColumn
+                data-testid={column.id}
                 ulRef={provided.innerRef}
                 title={column.name}
                 issues={column.issues}
