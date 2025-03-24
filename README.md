@@ -1,14 +1,16 @@
 # Kanban Board
 
 This app allows users to load and manage issues from GitHub repositories by
-entering the repo URL. Issues are categorized into three columns: ToDo, In
-Progress, and Done. You can drag and drop issues between columns to organize
-them. Your changes are saved locally in your browser. So even if you switch
-repositories or refresh the page, your adjustments will remain intact.
+entering the repo URL. Issues are categorized into three columns: **ToDo**,
+**InProgress**, and **Done**. You can drag and drop issues between columns to
+organize them. Your changes are saved locally in your browser, so even if you
+switch repositories or refresh the page, your adjustments will remain intact.
 
 ![Kanban Board](./public/1.webp)
 
-## Functionality
+---
+
+## 🛠️ Functionality
 
 - **Enter the Repository URL**:
 
@@ -17,35 +19,40 @@ repositories or refresh the page, your adjustments will remain intact.
 
 - **Load Issues**:
 
-  - Click the **"Load issues"** button to load issues from the specified
+  - Click the **"Load Issues"** button to load issues from the specified
     repository.
 
 - **View and Organize Issues**:
 
   - Issues will be displayed in three columns:
-    - **ToDo**: New issues.
-    - **In Progress**: Open issues with assignees.
-    - **Done**: Closed issues.
+    - **📝 ToDo**: New issues.
+    - **🔨 In Progress**: Open issues with assignees.
+    - **✅ Done**: Closed issues.
 
 - **Drag-and-Drop**:
 
-  - User can drag and drop issues from one column to another to reorganize them.
+  - Users can drag and drop issues from one column to another to reorganize
+    them.
 
 - **State Persistence**:
 
-  - The app will store the issue positions in Local Storage. When user switch
-    between repositories or reload the page, changes will be saved.
+  - The app stores the issue positions in **Local Storage**. When the user
+    switches between repositories or reloads the page, the changes will be
+    saved.
 
 - **Profile and Repo Links**:
-
   - Below the input field, there are links to the repository owner's profile and
     the repository itself.
 
-## About the Project
+---
+
+## 📚 About the Project
 
 [**Technical Task**](https://github.com/incodellc/github-kanban-test-task)
 
-## Technologies Used
+---
+
+## ⚙️ Technologies Used
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-%23764AEC.svg?style=for-the-badge&logo=redux&logoColor=white)
@@ -61,16 +68,18 @@ repositories or refresh the page, your adjustments will remain intact.
 - **@hello-pangea/dnd:** for drag-and-drop functionality
 - **Local Storage:** for storing issue positions between sessions
 - **ESLint** and **Prettier:** for code quality
-<!-- - **React Testing Library** for unit testing -->
 
-## Getting Started
+---
 
-### Installation
+## 🏁 Getting Started
+
+### 📦 Installation
 
 1. Clone the repository:
 
    ```bash
    git clone https://github.com/your-username/github-issues-dashboard.git
+
    ```
 
 2. Install dependencies:
@@ -87,5 +96,38 @@ repositories or refresh the page, your adjustments will remain intact.
 
 ---
 
-Feel free to contribute or provide feedback on how to improve the board! I
-welcome any suggestions for future enhancements or features!
+## 🧪 Testing
+
+The project includes unit tests to ensure reliability and stability.
+
+### 🚀 Running Tests
+
+To run the test suite, use the following command:
+
+```bash
+npm test
+```
+
+### 🛠️ Testing Tools
+
+![Vitest](https://img.shields.io/badge/Vitest-%23F24E1E.svg?style=for-the-badge&logo=vitest&logoColor=white)
+![React Testing Library](https://img.shields.io/badge/React%20Testing%20Library-%23F7DF1E.svg?style=for-the-badge&logo=react&logoColor=black)
+
+- **@testing-library/jest-dom** – provides additional matchers for testing the
+  DOM.
+- **MSW (Mock Service Worker)** – used to mock API requests.
+
+### 🔍 What is Tested?
+
+✔ **Component Rendering** – Ensuring that UI components render correctly.
+
+✔ **User Interactions** – Simulating events like clicks, drags, and inputs.
+
+✔ **API Calls** – Mocking GitHub API requests and verifying responses.
+
+✔ **State Management** – Testing Redux actions and reducers.
+
+---
+
+Feel free to contribute or provide feedback on how to improve the board. I
+welcome any suggestions for future enhancements or features!🎉
